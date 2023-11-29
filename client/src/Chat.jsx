@@ -3,7 +3,7 @@ import axios from "axios";
 import Logo from "./Logo";
 import {uniqBy} from "lodash";
 import { UserContext } from "./UserContext";
-import Contact from "./Contact"
+import Contact from "./Contact";
 
 export default function Chat(){
   const [ws, setWs]=useState (null);
@@ -17,7 +17,7 @@ export default function Chat(){
   useEffect(()=>{
     connectToWs();
     
-  },[]);
+  },[selectedUserId]);
 
   function connectToWs(){
     const ws = new WebSocket('ws://localhost:4040');
