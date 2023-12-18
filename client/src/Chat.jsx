@@ -20,7 +20,7 @@ export default function Chat(){
   },[selectedUserId]);
 
   function connectToWs(){
-    const ws = new WebSocket('wss://' + window.location.host);
+    const ws = new WebSocket(`wss://${window.location.host}:4040`);
     setWs(ws);
     ws.addEventListener('message',handleMessage);
     ws.addEventListener('close', () => {
