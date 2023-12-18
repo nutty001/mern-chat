@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path')
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
@@ -21,6 +22,8 @@ app.use(cors({
   credentials: true,
   origin: process.env.CLIENT_URL,
 }));
+
+app.use(express.static(path.join(__dirname, "..", 'client', "dist")));
 
 async function getUserDataFromRequest(req) {
   return new Promise((resolve, reject) => {
