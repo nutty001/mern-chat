@@ -59,8 +59,15 @@ res.json(messages);
 
 app.get('/api/people', async(req,res) => {
   mongoose.connect(process.env.MONGO_URL);
-  const users = await User.find({}, {'_id':1,username:1});
-  res.json(users);
+  const token = req.cookies?.token;
+  if (token) {
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      const users = await User.find({}, {'_id':1,username:1});
+      res.json(users);
+    });
+  } else {
+    res.status(401).json('no token');
+  }
 });
 
 app.get('/api/profile', (req,res) => {
