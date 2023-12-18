@@ -91,7 +91,7 @@ app.post('/api/login', async (req,res) => {
     const passOk = bcrypt.compareSync(password,foundUser.password);
     if(passOk){
       jwt.sign({userId:foundUser._id,username},jwtSecret,{},(err,token)=>{
-        res.cookie('token',token, {sameSite:'none', secure:true}).json({
+        res.cookie('token',token).json({
           id:foundUser._id,
         });
       });
@@ -101,7 +101,7 @@ app.post('/api/login', async (req,res) => {
 
 app.post('/api/logout', (req,res) => {
   mongoose.connect(process.env.MONGO_URL);
-  res.cookie('token','', {sameSite:'none', secure:true}).json('ok');
+  res.clearCookie('token').json('ok');
 });
 
 app.post('/api/register', async (req,res) => {
@@ -115,7 +115,7 @@ app.post('/api/register', async (req,res) => {
     });
     jwt.sign({userId:createdUser._id,username}, jwtSecret, {}, (err, token) => {
       if (err) throw err;
-      res.cookie('token', token, {sameSite:'none', secure:true}).status(201).json({
+      res.cookie('token', token).status(201).json({
         id: createdUser._id,
       });
     });
