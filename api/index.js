@@ -23,7 +23,7 @@ app.use(cors({
   origin: process.env.CLIENT_URL,
 }));
 
-app.use(express.static(path.join(__dirname, "..", 'client', "dist")));
+app.use("/",express.static(path.join(__dirname, "..", 'client', "dist")));
 
 async function getUserDataFromRequest(req) {
   return new Promise((resolve, reject) => {
@@ -43,6 +43,7 @@ async function getUserDataFromRequest(req) {
 app.get('/api/test', (req, res) =>{
   mongoose.connect(process.env.MONGO_URL);
   res.json('test ok');
+  console.log('hello world');
 });
 
 app.get('/api/messages/:userId', async (req,res) => {
@@ -124,7 +125,7 @@ app.post('/api/register', async (req,res) => {
     res.status(500).json('error');
   }
 });
-const server = app.listen(4040);
+const server = app.listen(5174);
 
 const wss = new ws.WebSocketServer({server});
 wss.on('connection', (connection, req) => {
