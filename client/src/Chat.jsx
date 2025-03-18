@@ -80,7 +80,7 @@ export default function Chat() {
   useEffect(() => {
     const div = divUnderMessages.current;
     if (div) {
-      div.scrollIntoView({ behaviour: "smooth", block: "end" });
+      div.scrollIntoView({ behavior: "smooth", block: "end" });
     }
   }, [messages]);
 
