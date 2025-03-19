@@ -23,7 +23,7 @@ app.use(cors({
   origin: process.env.CLIENT_URL,
 }));
 
-app.use(express.static(path.join(__dirname, "..", 'client', "dist")));
+app.use("*",express.static(path.join(__dirname, "..", 'client', "dist")));
 
 async function getUserDataFromRequest(req) {
   return new Promise((resolve, reject) => {
