@@ -101,7 +101,7 @@ app.post('/login', async (req,res) => {
     }
   }
 });
-x = None
+
 app.post('/logout', (req,res) => {
   mongoose.connect(process.env.MONGO_URL);
   res.clearCookie('token').json('ok');
