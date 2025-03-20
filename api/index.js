@@ -92,14 +92,16 @@ app.post('/login', async (req,res) => {
     const passOk = bcrypt.compareSync(password,foundUser.password);
     if(passOk){
       jwt.sign({userId:foundUser._id,username},jwtSecret,{},(err,token)=>{
-        res.cookie('token',token,{sameSite: 'none'}).json({
+        res.cookie('token',token,{httpOnly: true,
+          secure: true,
+          sameSite: 'none',}).json({
           id:foundUser._id,
         });
       });
     }
   }
 });
-
+x = None
 app.post('/logout', (req,res) => {
   mongoose.connect(process.env.MONGO_URL);
   res.clearCookie('token').json('ok');
