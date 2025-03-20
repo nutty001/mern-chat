@@ -92,7 +92,7 @@ app.post('/login', async (req,res) => {
     const passOk = bcrypt.compareSync(password,foundUser.password);
     if(passOk){
       jwt.sign({userId:foundUser._id,username},jwtSecret,{},(err,token)=>{
-        res.cookie('token',token).json({
+        res.cookie('token',token,{sameSite: 'none'}).json({
           id:foundUser._id,
         });
       });
