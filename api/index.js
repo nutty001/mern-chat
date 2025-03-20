@@ -94,7 +94,7 @@ app.post('/login', async (req,res) => {
       jwt.sign({userId:foundUser._id,username},jwtSecret,{},(err,token)=>{
         res.cookie('token',token,{httpOnly: true,
           secure: true,
-          sameSite: 'none',}).json({
+          sameSite: 'None',}).json({
           id:foundUser._id,
         });
       });
